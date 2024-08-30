@@ -27,7 +27,7 @@ public class Paciente {
     @Column(name = "data_cadastro", nullable = false)
     private LocalDate dataCadastro;
 
-    public Paciente(){}
+    public Paciente() {}
 
     public Paciente(String nome, String email, String telefone, LocalDate dataNascimento, LocalDate dataCadastro) {
         this.nome = nome;
