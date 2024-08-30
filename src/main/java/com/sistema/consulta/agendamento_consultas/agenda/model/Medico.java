@@ -1,14 +1,13 @@
 package com.sistema.consulta.agendamento_consultas.agenda.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
-import java.time.LocalDate;
-
-import jakarta.persistence.Column;
 
 @Entity
 @Table(name = "medicos")
