@@ -1,4 +1,4 @@
-package com.sistema.consulta.agendamento_consultas.agenda;
+package com.sistema.consulta.agendamento_consultas.agenda.model;
 
 import java.time.LocalDateTime;
 
@@ -78,5 +78,4 @@ public class Consulta {
     public void setMedico(Medico medico) {
         this.medico = medico;
     }
-
 }

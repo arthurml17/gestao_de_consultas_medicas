@@ -1,4 +1,4 @@
-package com.sistema.consulta.agendamento_consultas.agenda;
+package com.sistema.consulta.agendamento_consultas.agenda.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
