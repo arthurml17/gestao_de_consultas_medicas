@@ -26,17 +26,12 @@ public class ConsultaController {
 
     @PostMapping
     public ResponseEntity<Consulta> agendarConsulta(@RequestBody Consulta consulta){
-        Consulta novaConsulta = agendaService.agendarConsulta(consulta);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novaConsulta);
+        return ResponseEntity.status(HttpStatus.CREATED).body(agendaService.agendarConsulta(consulta));
     }
 
     @DeleteMapping("/{consultaId}")
     public ResponseEntity<HttpStatus> cancelarConsulta(@RequestParam Long consultaId) {
-        try{
-            agendaService.cancelarConsulta(consultaId);
-            return ResponseEntity.status(HttpStatus.OK).build();
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        agendaService.cancelarConsulta(consultaId);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

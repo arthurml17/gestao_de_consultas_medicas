@@ -1,6 +1,7 @@
 package com.sistema.consulta.agendamento_consultas.agenda.controller;
 
-import com.sistema.consulta.agendamento_consultas.agenda.model.Consulta;
+import com.sistema.consulta.agendamento_consultas.agenda.model.Paciente;
+import com.sistema.consulta.agendamento_consultas.agenda.service.impl.PacienteServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,29 +14,26 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PacienteController {
 
-//    @GetMapping
-//    public List<Paciente> listarPacientes(){
-//        return agendaService.listarConsultas();
-//    }
-//
-//    @GetMapping("/{consultaId}")
-//    public Consulta getConsulta(@RequestParam Long consultaId) { return agendaService.getConsulta(consultaId);}
-//
-//    @PostMapping
-//    public ResponseEntity<Consulta> agendarConsulta(@RequestBody Consulta consulta){
-//        Consulta novaConsulta = agendaService.agendarConsulta(consulta);
-//        return ResponseEntity.status(HttpStatus.CREATED).body(novaConsulta);
-//    }
-//
-//    @DeleteMapping("/{consultaId}")
-//    public ResponseEntity<HttpStatus> cancelarConsulta(@RequestParam Long consultaId) {
-//        try{
-//            agendaService.cancelarConsulta(consultaId);
-//            return ResponseEntity.status(HttpStatus.OK).build();
-//        }catch (Exception e){
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//        }
-//    }
+    private final PacienteServiceImpl pacienteService;
+
+    @GetMapping
+    public List<Paciente> listPacientes(){
+        return pacienteService.listPacientes();
+    }
+
+    @GetMapping("/{pacienteId}")
+    public Paciente getPaciente(@RequestParam Long pacienteId) { return pacienteService.getPaciente(pacienteId);}
+
+    @PostMapping
+    public ResponseEntity<Paciente> createMedico(@RequestBody Paciente paciente){
+        return ResponseEntity.status(HttpStatus.CREATED).body(pacienteService.createPaciente(paciente));
+    }
+
+    @DeleteMapping("/{pacienteId}")
+    public ResponseEntity<HttpStatus> deletePaceinte(@RequestParam Long pacienteId) {
+        pacienteService.removePaciente(pacienteId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 
 
 }
