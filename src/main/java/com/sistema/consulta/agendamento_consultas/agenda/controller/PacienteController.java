@@ -17,12 +17,14 @@ public class PacienteController {
     private final PacienteServiceImpl pacienteService;
 
     @GetMapping
-    public List<Paciente> listPacientes(){
-        return pacienteService.listPacientes();
+    public ResponseEntity<List<Paciente>> listPacientes(){
+        return ResponseEntity.status(HttpStatus.OK).body(pacienteService.listPacientes());
     }
 
     @GetMapping("/{pacienteId}")
-    public Paciente getPaciente(@RequestParam Long pacienteId) { return pacienteService.getPaciente(pacienteId);}
+    public ResponseEntity<Paciente> getPaciente(@RequestParam Long pacienteId) {
+        return ResponseEntity.status(HttpStatus.OK).body(pacienteService.getPaciente(pacienteId));
+    }
 
     @PostMapping
     public ResponseEntity<Paciente> createMedico(@RequestBody Paciente paciente){

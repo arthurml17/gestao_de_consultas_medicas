@@ -17,12 +17,14 @@ public class ConsultaController {
     private final AgendaServiceImpl agendaService;
 
     @GetMapping
-    public List<Consulta> listConsultas(){
-        return agendaService.listConsultas();
+    public ResponseEntity<List<Consulta>> listConsultas(){
+        return ResponseEntity.status(HttpStatus.OK).body(agendaService.listConsultas());
     }
 
     @GetMapping("/{consultaId}")
-    public Consulta getConsulta(@RequestParam Long consultaId) { return agendaService.getConsulta(consultaId);}
+    public ResponseEntity<Consulta> getConsulta(@RequestParam Long consultaId) {
+        return ResponseEntity.status(HttpStatus.OK).body(agendaService.getConsulta(consultaId));
+    }
 
     @PostMapping
     public ResponseEntity<Consulta> agendarConsulta(@RequestBody Consulta consulta){

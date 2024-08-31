@@ -18,12 +18,14 @@ public class MedicoController {
 
 
     @GetMapping
-    public List<Medico> listMedicos(){
-        return medicoService.listMedicos();
+    public ResponseEntity<List<Medico>> listMedicos(){
+        return ResponseEntity.status(HttpStatus.OK).body(medicoService.listMedicos());
     }
 
     @GetMapping("/{medicoId}")
-    public Medico getMedico(@RequestParam Long medicoId) { return medicoService.getMedico(medicoId);}
+    public ResponseEntity<Medico> getMedico(@RequestParam Long medicoId) {
+        return ResponseEntity.status(HttpStatus.OK).body(medicoService.getMedico(medicoId));
+    }
 
     @PostMapping
     public ResponseEntity<Medico> createMedico(@RequestBody Medico medico){
