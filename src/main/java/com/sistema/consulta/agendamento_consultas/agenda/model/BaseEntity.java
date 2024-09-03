@@ -18,7 +18,7 @@ public abstract class BaseEntity {
     @Column(name = "data_cadastro", nullable = false)
     private LocalDate dataCadastro = LocalDate.now();
 
-    @Column(name = "data_update", nullable = false)
+    @Column(name = "data_update")
     private LocalDate dataUpdate;
 
 }

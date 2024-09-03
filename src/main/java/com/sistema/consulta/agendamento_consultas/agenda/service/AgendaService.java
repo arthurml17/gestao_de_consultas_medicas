@@ -12,7 +12,7 @@ public interface AgendaService {
 
     Consulta getConsulta(Long consultaId);
 
-    Consulta agendarConsulta(Consulta consulta);
+    Consulta agendarConsulta(Consulta consulta) throws Exception;
 
     boolean checarDisponibilidadeMedico(Medico medico, LocalDateTime dataHora);
 

@@ -11,8 +11,6 @@ import org.springframework.stereotype.Service;
 import com.sistema.consulta.agendamento_consultas.agenda.model.Consulta;
 import com.sistema.consulta.agendamento_consultas.agenda.model.Medico;
 import com.sistema.consulta.agendamento_consultas.agenda.repository.ConsultaRepository;
-import com.sistema.consulta.agendamento_consultas.agenda.repository.MedicoRepository;
-import com.sistema.consulta.agendamento_consultas.agenda.repository.PacienteRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -20,9 +18,9 @@ public class AgendaServiceImpl implements AgendaService {
 
     private final ConsultaRepository consultaRepository;
 
-    private final PacienteRepository pacienteRepository;
+    private final PacienteServiceImpl pacienteService;
 
-    private final MedicoRepository medicoRepository;
+    private final MedicoServiceImpl medicoService;
 
     @Override
     public List<Consulta> listConsultas() {
@@ -39,20 +37,22 @@ public class AgendaServiceImpl implements AgendaService {
     }
 
     @Override
-    public Consulta agendarConsulta(Consulta consulta) {
-        if(consulta == null || consulta.getMedico() == null || consulta.getPaciente() == null)
-            throw new IllegalArgumentException("Consulta invalida");
+    public Consulta agendarConsulta(Consulta consulta) throws Exception {
+        try {
+            if(consulta == null || consulta.getMedico() == null || consulta.getPaciente() == null)
+                throw new IllegalArgumentException("Consulta invalida");
 
-        pacienteRepository.findById(consulta.getPaciente().getId())
-                .orElseThrow(() -> new IllegalArgumentException("Paciente não encontrado"));
+            pacienteService.getPaciente(consulta.getPaciente().getId());
 
-        Medico medico = medicoRepository.findById(consulta.getMedico().getId())
-                .orElseThrow(() -> new IllegalArgumentException("Medico não encontrado"));
+            Medico medico = medicoService.getMedico(consulta.getMedico().getId());
 
-        if(!checarDisponibilidadeMedico(medico, consulta.getDataHora()))
-            throw new IllegalArgumentException("Médico não disponivel para essa data e hora");
+            if(checarDisponibilidadeMedico(medico, consulta.getDataHora()))
+                throw new IllegalArgumentException("Médico não disponivel para essa data e hora");
 
-        return consultaRepository.save(consulta);
+            return consultaRepository.save(consulta);
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
     }
 
     @Override

@@ -27,7 +27,7 @@ public class ConsultaController {
     }
 
     @PostMapping
-    public ResponseEntity<Consulta> agendarConsulta(@RequestBody Consulta consulta){
+    public ResponseEntity<Consulta> agendarConsulta(@RequestBody Consulta consulta)  throws Exception{
         return ResponseEntity.status(HttpStatus.CREATED).body(agendaService.agendarConsulta(consulta));
     }
 
